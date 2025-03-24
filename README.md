@@ -7,6 +7,8 @@ Reference scripts in R on common data tasks for Maryland State employees
 1. Repetition
 2. Big(gish) data
 3. Merging together different datasets
+4. Basic charting
+5. Geospatial data
 
 ## Prerequisites
 

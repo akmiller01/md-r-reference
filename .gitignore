@@ -55,5 +55,6 @@ output/*.svg
 output/*.RData
 output/*.zip
 output/*.gz
+output/*.html
 output/*/
 code/.env
