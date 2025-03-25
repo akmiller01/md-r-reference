@@ -57,4 +57,5 @@ output/*.zip
 output/*.gz
 output/*.html
 output/*/
-code/.env
+.env
+nhgis_crosswalks/*
