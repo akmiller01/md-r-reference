@@ -308,3 +308,20 @@ acs_2019_crosswalked = acs_2019_crosswalked[,.(
 acs_2019_2020 = rbindlist(list(acs_2019_crosswalked, acs_2020), fill=T)
 acs_2019_2020_long = melt(acs_2019_2020, id.vars=c("GEOID", "year"))
 acs_wide = dcast(acs_2019_2020_long, GEOID~variable+year)
+
+# As with the Census, the Maryland Open Data Portal runs on a service
+# called `Socrata` that also has an R package.
+# On any given data page, click "Actions" and then "API" to get the URL you'll need
+# For e.g. on this page https://opendata.maryland.gov/Demographic/Maryland-Total-Residential-Population-1790-2020/sk8g-4e43/about_data
+# the URL is https://opendata.maryland.gov/resource/sk8g-4e43.json
+# Public resources can be loaded just with that URL
+
+md_pop = read.socrata(url="https://opendata.maryland.gov/resource/sk8g-4e43.json")
+
+# For internal data sources, you will need your credentials like so:
+socrataEmail = Sys.getenv("SOCRATA_EMAIL")
+socrataPassword = Sys.getenv("SOCRATA_PASSWORD")
+
+# Load internal data
+privateResourceToReadCsvUrl = "https://data.maryland.gov/resource/rn4j-6grc.json"
+internalData = read.socrata(url = privateResourceToReadCsvUrl, email = socrataEmail, password = socrataPassword)
