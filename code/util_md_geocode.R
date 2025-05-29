@@ -35,7 +35,7 @@ md_find_address_candidates = function(
   if(is.null(SingleLine) & is.null(Address)){
     stop("Either SingleLine or Address must be specified.")
   }
-  url_base = "https://geodata.md.gov/imap/rest/services/GeocodeServices/MD_CompositeLocator/GeocodeServer/findAddressCandidates?f=json&"
+  url_base = "https://mdgeodata.md.gov/imap/rest/services/GeocodeServices/MD_MultiroleLocator/GeocodeServer/findAddressCandidates?f=json&"
   query_string = create_query_string(match.call()[-1])
   json_response = fromJSON(paste(url_base, query_string, sep="&"))
   latest_crs = json_response$spatialReference$latestWkid
@@ -51,7 +51,7 @@ md_reverse_geocode = function(
     Location,
     Distance = NULL
 ){
-  url_base = "https://geodata.md.gov/imap/rest/services/GeocodeServices/MD_CompositeLocator/GeocodeServer/reverseGeocode?f=json&"
+  url_base = "https://mdgeodata.md.gov/imap/rest/services/GeocodeServices/MD_MultiroleLocator/GeocodeServer/reverseGeocode?f=json&"
   md_crs = 3857
   if(st_crs(Location) != md_crs){
     Location = st_transform(Location, crs = md_crs)
@@ -118,7 +118,7 @@ md_geocode_singleline = function(
     batch_size = 1000,
     timeout = 60
 ){
-  url_base = "https://geodata.md.gov/imap/rest/services/GeocodeServices/MD_CompositeLocator/GeocodeServer/geocodeAddresses?f=json"
+  url_base = "https://mdgeodata.md.gov/imap/rest/services/GeocodeServices/MD_MultiroleLocator/GeocodeServer/geocodeAddresses?f=json"
   .data$ObjectID = 1:nrow(.data)
   object_id_vector = .data$ObjectID
   address_col = enquo(address_col)
@@ -183,7 +183,7 @@ md_geocode = function(
     batch_size = 1000,
     timeout = 60
 ){
-  url_base = "https://geodata.md.gov/imap/rest/services/GeocodeServices/MD_CompositeLocator/GeocodeServer/geocodeAddresses?f=json"
+  url_base = "https://mdgeodata.md.gov/imap/rest/services/GeocodeServices/MD_MultiroleLocator/GeocodeServer/geocodeAddresses?f=json"
   .data$ObjectID = 1:nrow(.data)
   object_id_vector = .data$ObjectID
   Address_col = enquo(Address_col)
